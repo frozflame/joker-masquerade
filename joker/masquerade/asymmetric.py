@@ -4,6 +4,7 @@
 from __future__ import division, print_function
 
 from joker.cast import want_bytes
+from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric import rsa, padding
 
@@ -52,8 +53,6 @@ class RSAKeyPair(object):
         """
         :return: an _RSAPrivateKey instance
         """
-        from cryptography.hazmat.backends import default_backend
-        from cryptography.hazmat.primitives.asymmetric import rsa
         return rsa.generate_private_key(
             backend=default_backend(),
             public_exponent=65537,
@@ -62,15 +61,11 @@ class RSAKeyPair(object):
 
     @staticmethod
     def loads_private_key(bs, password=None):
-        from cryptography.hazmat.backends import default_backend
-        from cryptography.hazmat.primitives import serialization
         return serialization.load_pem_private_key(
             bs, password=password, backend=default_backend())
 
     @staticmethod
     def loads_public_key(bs):
-        from cryptography.hazmat.backends import default_backend
-        from cryptography.hazmat.primitives import serialization
         return serialization.load_ssh_public_key(bs, default_backend())
 
     @staticmethod
@@ -79,7 +74,6 @@ class RSAKeyPair(object):
         :param rsa_key: an _RSAPrivateKey instance
         :return: a str instance
         """
-        from cryptography.hazmat.primitives import serialization
         return rsa_key.private_bytes(
             serialization.Encoding.PEM,
             serialization.PrivateFormat.PKCS8,

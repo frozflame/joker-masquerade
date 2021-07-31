@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 # coding: utf-8
 
-from __future__ import division, print_function
-from joker.masquerade.asymmetric import RSAKeyPair
+from joker.masquerade.rsa import RSAKeyPair
 
 
 def test_rsa_key_pair():
